@@ -16,7 +16,7 @@ const connectToDB = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     tls: true,
-    tlsCAFile: `${__dirname}/root/dbaas_ca_cert.crt`, // server - remember to comment on push
+    tlsCAFile: `/root/dbaas_ca_cert.crt`, // server - remember to comment on push
     // tlsCAFile: "./ca-certificate.crt", // local dev -> Remeber to comment on push
   });
 
