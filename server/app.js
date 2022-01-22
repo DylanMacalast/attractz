@@ -16,8 +16,7 @@ const connectToDB = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     tls: true,
-    tlsCAFile: `/root/dbaas_ca_cert.crt`, // server - remember to comment on push
-    // tlsCAFile: "./ca-certificate.crt", // local dev -> Remeber to comment on push
+    tlsCAFile: `${__dirname}/ca-certificate.crt`,
   });
 
   const db = client.db("attractz");
@@ -29,15 +28,19 @@ const connectToDB = async () => {
 };
 
 app.get("/", (req, res) => {
-  res.send("hello");
+  res.send("hello there");
 });
 
 app.get("/attractz", async (req, res) => {
-  const db = await connectToDB();
-  const collection = await db.collection("attractz");
-  const attractz = await collection.find({}).toArray();
+  try {
+    const db = await connectToDB();
+    const collection = await db.collection("attractz");
+    const attractz = await collection.find({}).toArray();
 
-  res.json({ attractz });
+    res.json({ attractz });
+  } catch (e) {
+    res.json({ message: e.message });
+  }
 });
 
 app.listen(port, () => {
