@@ -21,7 +21,7 @@ const connectToDB = async () => {
 
   const db = client.db("attractz");
 
-  cachedDB = client;
+  cachedClient = client;
   cachedDB = db;
 
   return db;
