@@ -16,7 +16,8 @@ const connectToDB = async () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     tls: true,
-    tlsCAFile: "./ca-certificate.crt",
+    tlsCAFile: `${__dirname}/root/dbaas_ca_cert.crt`, // server
+    // tlsCAFile: "./ca-certificate.crt", // local dev
   });
 
   const db = client.db("attractz");
