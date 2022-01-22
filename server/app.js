@@ -12,12 +12,12 @@ let cachedDB = null;
 const connectToDB = async () => {
   if (cachedDB) return cachedDB;
 
-  const client = await MongoClient.connect(process.env.DATABASE_URL, {
+  const client = await MongoClient.connect(process.env.DATABASE_STR, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     tls: true,
-    tlsCAFile: `${__dirname}/root/dbaas_ca_cert.crt`, // server
-    // tlsCAFile: "./ca-certificate.crt", // local dev
+    tlsCAFile: `${__dirname}/root/dbaas_ca_cert.crt`, // server - remember to comment on push
+    // tlsCAFile: "./ca-certificate.crt", // local dev -> Remeber to comment on push
   });
 
   const db = client.db("attractz");
