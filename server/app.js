@@ -1,10 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const mongodb = require("mongodb");
+const path = require("path");
 
 const app = express();
 const MongoClient = mongodb.MongoClient;
 const port = process.env.PORT || 3000;
+
+// START the app
+app.use(express.static(path.join(__dirname, "../client/", "dist")));
 
 let cachedClient = null;
 let cachedDB = null;
@@ -27,12 +31,6 @@ const connectToDB = async () => {
   return db;
 };
 
-app.get("/", (req, res) => {
-  res.send("hello there");
-});
-
-
-
 app.get("/attractz", async (req, res) => {
   try {
     const db = await connectToDB();
@@ -51,15 +49,17 @@ app.get("/attractz/:id", async (req, res) => {
     const db = await connectToDB();
     const collection = await db.collection("attractz");
     // console.log(db.collection("attractz"))
-    const attractzId = await collection.findOne({ _id: attractzId("61ec1691f8b34cc378b1e118") })
+    const attractzId = await collection.findOne({
+      _id: attractzId("61ec1691f8b34cc378b1e118"),
+    });
 
-    res.json({attractzId})
+    res.json({ attractzId });
   } catch (error) {
-    res.json({ message: error.message})
+    res.json({ message: error.message });
   }
-})
+});
 
-app.post("/attractz", async (req, res) =>{
+app.post("/attractz", async (req, res) => {
   try {
     const db = await connectToDB();
     const collection = await db.collection("attractz");
@@ -69,21 +69,21 @@ app.post("/attractz", async (req, res) =>{
       rules: [
         {
           id: 2,
-          title: "cals rule"
-        }
+          title: "cals rule",
+        },
       ],
       hotspots: [
         {
           id: 2,
-          title: "hotspot cal"
-        }
-      ]
-    })
-    res.json(attractz)
+          title: "hotspot cal",
+        },
+      ],
+    });
+    res.json(attractz);
   } catch (error) {
-    res.json({ message: error.message})
+    res.json({ message: error.message });
   }
-})
+});
 
 app.listen(port, () => {
   console.log("app is running on port", port);
