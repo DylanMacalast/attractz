@@ -1,0 +1,23 @@
+{
+  "name": "attractz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch-all": "concurrently -k -p \"[{name}]\" -n \"Server,Client\" -c \"cyan.bold,magenta.bold\" \"cd ./server && npm run dev\" \"cd ./client && npm run dev\"",
+    "dev": "concurrently -l 0 -p \"{none}\" -k \"npm run watch-all\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DylanMacalast/attractz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DylanMacalast/attractz/issues"
+  },
+  "homepage": "https://github.com/DylanMacalast/attractz#readme",
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
