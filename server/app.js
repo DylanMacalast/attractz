@@ -31,17 +31,59 @@ app.get("/", (req, res) => {
   res.send("hello there");
 });
 
+
+
 app.get("/attractz", async (req, res) => {
   try {
     const db = await connectToDB();
     const collection = await db.collection("attractz");
     const attractz = await collection.find({}).toArray();
+    // console.log(attractz)
 
     res.json({ attractz });
   } catch (e) {
     res.json({ message: e.message });
   }
 });
+
+app.get("/attractz/:id", async (req, res) => {
+  try {
+    const db = await connectToDB();
+    const collection = await db.collection("attractz");
+    // console.log(db.collection("attractz"))
+    const attractzId = await collection.findOne({ _id: attractzId("61ec1691f8b34cc378b1e118") })
+
+    res.json({attractzId})
+  } catch (error) {
+    res.json({ message: error.message})
+  }
+})
+
+app.post("/attractz", async (req, res) =>{
+  try {
+    const db = await connectToDB();
+    const collection = await db.collection("attractz");
+
+    const attractz = await collection.insertOne({
+      name: "test",
+      rules: [
+        {
+          id: 2,
+          title: "cals rule"
+        }
+      ],
+      hotspots: [
+        {
+          id: 2,
+          title: "hotspot cal"
+        }
+      ]
+    })
+    res.json(attractz)
+  } catch (error) {
+    res.json({ message: error.message})
+  }
+})
 
 app.listen(port, () => {
   console.log("app is running on port", port);
