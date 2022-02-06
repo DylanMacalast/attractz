@@ -4,9 +4,60 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/62d569df3d.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Attractz</title>
   </head>
   <body>
-    <h1>Hello there you cunt tehe hahaha p</h1>
+    <header>
+      <h1>COASTAL STAY</h1>
+    </header>
+    <main></main>
   <script defer src="bundle.js"></script></body>
 </html>
+
+<template id="home">
+  <h2><i class="fab fa-hubspot"></i> Spots</h2>
+  <div id="spots-container" class="container"></div>
+  <h2><i class="fas fa-info"></i> Information & Rules</h2>
+  <div id="rules-container" class="container"></div>
+  <footer>
+    <button id="goMap" class="footer-btn">
+      <i class="fas fa-map-marker-alt"></i>
+    </button>
+  </footer>
+</template>
+
+<template id="spot">
+  <div class="spot" id="spot-{{id}}">
+    <h3>{{title}}</h3>
+    <div class="inner-wrap">
+      <div style="height: 80px; width: 80px; background-color: gray"></div>
+      <p class="short-text">{{ content }}</p>
+    </div>
+  </div>
+</template>
+
+<template id="rule">
+  <div class="rule" id="rule-{{id}}">
+    <h3><i class="fas fa-hand-point-right"></i></h3>
+    <p>{{content}}</p>
+  </div>
+</template>
+
+<template id="mapContainer">
+  <div class="my-map"><h1>TODO: LOAD MAP</h1></div>
+  <footer>
+    <button id="goHome" class="footer-btn">
+      <i class="fas fa-home"></i>
+    </button>
+  </footer>
+</template>
