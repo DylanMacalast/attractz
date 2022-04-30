@@ -1,6 +1,6 @@
 import Mustache from "mustache";
 import "./index.css";
-import { showMap } from "./map";
+// import { showMap } from "./map";
 
 // weird stroing it here but hey!
 let data = null;
@@ -20,24 +20,28 @@ export const initHome = async () => {
     data = await getData();
   }
 
-  data.rules.forEach((rule) => {
-    ruleHtml.push(
-      Mustache.render(ruleTemplate, {
-        id: rule.id,
-        content: rule.content,
-      })
-    );
-  });
+  if (data?.rules) {
+    data.rules.forEach((rule) => {
+      ruleHtml.push(
+        Mustache.render(ruleTemplate, {
+          id: rule.id,
+          content: rule.content,
+        })
+      );
+    });
+  }
 
-  data.hotspots.forEach((spot) => {
-    spotHtml.push(
-      Mustache.render(spotTemplate, {
-        id: spot.id,
-        title: spot.title,
-        content: spot.content,
-      })
-    );
-  });
+  if (data?.hotspots) {
+    data.hotspots.forEach((spot) => {
+      spotHtml.push(
+        Mustache.render(spotTemplate, {
+          id: spot.id,
+          title: spot.title,
+          content: spot.content,
+        })
+      );
+    });
+  }
 
   const spotsContainer = document.getElementById("spots-container");
   spotsContainer.innerHTML = spotHtml.join(" ");
@@ -45,11 +49,11 @@ export const initHome = async () => {
   const rulesContainer = document.getElementById("rules-container");
   rulesContainer.innerHTML = ruleHtml.join(" ");
 
-  const mapBtn = document.getElementById("goMap");
+  // const mapBtn = document.getElementById("goMap");
 
-  mapBtn.addEventListener("click", (e) => {
-    showMap();
-  });
+  // mapBtn.addEventListener("click", (e) => {
+  //   showMap();
+  // });
 };
 
 const getData = async () => {
@@ -61,7 +65,8 @@ const getData = async () => {
   }
 
   const payload = await response.json();
-  const attract = payload.attractz[0];
+  // const attract = payload.attractz[0];
+  const attract = {};
   return attract;
 };
 

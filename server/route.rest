@@ -1,7 +1,0 @@
-
-POST http://localhost:3000/attractz/
-Content-Type: application/json
-###
-
-
-GET  http://localhost:3000/attractz/61ec906635becd854af7b112

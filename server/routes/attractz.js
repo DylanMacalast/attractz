@@ -1,13 +1,13 @@
-const express = require('express');
-const attractz = require('../models/attractz')
+const express = require("express");
+const attractz = require("../models/attractz");
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.send("hello there");
-  });
+  res.send("hello there");
+});
 
-  // app.get("/attractz", async (req, res) => {
+// app.get("/attractz", async (req, res) => {
 //   try {
 //     const db = await connectToDB();
 //     const collection = await db.collection("attractz");
@@ -18,6 +18,5 @@ router.get("/", (req, res) => {
 //     res.json({ message: e.message });
 //   }
 // });
-  
 
-  module.exports = router
+module.exports = router;
