@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "watch-all": "concurrently -k -p \"[{name}]\" -n \"Server,Client\" -c \"cyan.bold,magenta.bold\" \"cd ./server && npm run dev\" \"cd ./client && npm run dev\"",
-    "dev": "concurrently -l 0 -p \"{none}\" -k \"npm run watch-all\""
+    "dev": "concurrently -l 0 -p \"{none}\" -k \"npm run watch-all\"",
+    "postinstall": "npm install --prefix ./server && npm install --prefix ./client"
   },
   "repository": {
     "type": "git",
