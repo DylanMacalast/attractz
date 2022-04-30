@@ -17,7 +17,7 @@ export const initHome = async () => {
   main.innerHTML = rendered;
 
   if (data == null) {
-    data = await getData();
+    // data = await getData();
   }
 
   if (data?.rules) {

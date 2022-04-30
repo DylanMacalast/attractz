@@ -12,9 +12,9 @@ app.use(express.static(path.join(__dirname, "../client/", "dist")));
 // DB connection
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  // ssl: {
-  //   rejectUnauthorized: false,
-  // },
+  ssl: {
+    rejectUnauthorized: false,
+  },
   ssl: false,
 });
 
