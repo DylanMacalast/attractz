@@ -9,9 +9,12 @@ const port = process.env.PORT || 3000;
 // START the app
 app.use(express.static(path.join(__dirname, "../client/", "dist")));
 
+const isProduction = process.env.NODE_ENV === "production";
+const connectionString = `postgresql://${process.env.PG_USER}:${process.env.PG_PASSWORD}@${process.env.PG_HOST}:${process.env.PG_PORT}/${process.env.PG_DATABASE}`;
+
 // DB connection
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
   ssl: {
     rejectUnauthorized: false,
   },
