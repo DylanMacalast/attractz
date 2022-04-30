@@ -1,17 +1,35 @@
 require("dotenv").config();
 const express = require("express");
-const mongodb = require("mongodb");
 const path = require("path");
+const { Client } = require("pg");
 
 const app = express();
-const MongoClient = mongodb.MongoClient;
 const port = process.env.PORT || 3000;
 
 // START the app
 app.use(express.static(path.join(__dirname, "../client/", "dist")));
 
-let cachedClient = null;
-let cachedDB = null;
+// DB connection
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
+  ssl: false,
+});
+
+client.connect();
+
+client.query(
+  "SELECT table_schema,table_name FROM information_schema.tables;",
+  (err, res) => {
+    if (err) throw err;
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+    client.end();
+  }
+);
 
 // const connectToDB = async () => {
 //   if (cachedDB) return cachedDB;
